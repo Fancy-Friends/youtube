@@ -1,0 +1,55 @@
+{
+  "$comment": "Read from Google's YouTube v3 discovery document: playlistItems.insert -> POST youtube/v3/playlistItems, request PlaylistItem, response PlaylistItem. servicePath is empty, so the method path already is the full /youtube/v3/playlistItems path.",
+  "operation": "playlist_item_insert",
+  "kind": "playlist_item",
+  "title": "YouTube playlist item",
+  "description": "Add a video to a YouTube playlist.",
+  "summary": "add a video to a playlist",
+  "docs": "https://developers.google.com/youtube/v3/docs/playlistItems/insert",
+  "sideEffects": "unsafe-to-replay",
+  "$idempotencyComment": "playlistItems.insert exposes no idempotency key. A retried durable run can add the video a SECOND time, so the action is honestly unsafe-to-replay.",
+  "request": {
+    "method": "POST",
+    "path": "/youtube/v3/playlistItems",
+    "encoding": "json",
+    "query": {
+      "part": "snippet",
+      "$comment": "part is a REQUIRED query parameter that names both the request properties being written and the response properties included. This action always writes snippet, so `snippet` is a protocol literal the caller never chooses -- exposing a one-option config field would lie about the API."
+    },
+    "constants": {
+      "snippet.resourceId.kind": "youtube#video",
+      "$comment": "ResourceId is generic across videos, playlists and channels. This action adds a VIDEO, so kind is fixed in the nested request body rather than exposed as a choice that could contradict videoId."
+    }
+  },
+  "config": [
+    {
+      "type": "text",
+      "key": "playlistId",
+      "label": "Playlist ID",
+      "required": true,
+      "description": "The YouTube id of the playlist to add the video to.",
+      "send": { "as": "snippet.playlistId", "value": "string" }
+    },
+    {
+      "type": "text",
+      "key": "videoId",
+      "label": "Video ID",
+      "required": true,
+      "description": "The YouTube id of the video to add.",
+      "send": { "as": "snippet.resourceId.videoId", "value": "string" }
+    }
+  ],
+  "outputShape": [
+    { "path": "data.id", "type": "string", "description": "YouTube's unique id for the new playlist item." },
+    { "path": "data.kind", "type": "string", "description": "The fixed resource kind `youtube#playlistItem`." },
+    { "path": "data.snippet.playlistId", "type": "string", "description": "The playlist containing the item." },
+    { "path": "data.snippet.resourceId.videoId", "type": "string", "description": "The video added to the playlist." },
+    { "path": "data.snippet.position", "type": "number", "description": "The item's zero-based position in the playlist." }
+  ],
+  "$outputComment": "playlistItems.insert returns PlaylistItem directly at the response top level; the connector runtime exposes that body under data, without a playlistItem wrapper.",
+  "contract": {
+    "$comment": "The query parameter and PlaylistItem fields this action sends and reads, used by discovery drift projection.",
+    "sends": ["part", "snippet"],
+    "reads": ["id", "kind", "snippet"]
+  }
+}

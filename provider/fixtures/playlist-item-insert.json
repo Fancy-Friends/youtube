@@ -1,0 +1,23 @@
+{
+  "$comment": "A PlaylistItem returned directly at the response top level. The shape reproduces the fields this action reads from Google's PlaylistItem and PlaylistItemSnippet schemas.",
+  "operation": "playlist_item_insert",
+  "response": {
+    "kind": "youtube#playlistItem",
+    "etag": "example-etag",
+    "id": { "$fake": "id", "prefix": "PLItem" },
+    "snippet": {
+      "publishedAt": "2026-01-01T00:00:00Z",
+      "channelId": "UCexamplechannel",
+      "title": "Example video",
+      "description": "",
+      "playlistId": { "$config": "playlistId", "as": "string", "default": "PLexampleplaylist" },
+      "position": 0,
+      "resourceId": {
+        "kind": "youtube#video",
+        "videoId": { "$config": "videoId", "as": "string", "default": "dQw4w9WgXcQ" }
+      },
+      "videoOwnerChannelTitle": "Example channel",
+      "videoOwnerChannelId": "UCexampleowner"
+    }
+  }
+}

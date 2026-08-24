@@ -1,0 +1,144 @@
+# GENERATED FILE — do not edit.
+#
+# Emitted from provider/actions/playlist-item-insert.json by weaver's
+# generator.
+# A hand-edit here is destroyed by the next protocol sync, which is worse than
+# being rejected, because it works until it silently does not. Fix
+# provider/actions/playlist-item-insert.json (or weaver's template/) and
+# regenerate:
+#
+# npm run provider -- youtube
+
+"""Add a video to a YouTube playlist.
+
+POST /youtube/v3/playlistItems —
+https://developers.google.com/youtube/v3/docs/playlistItems/insert
+
+This describes the request. `call` resolves the connection, picks the
+estate, and either calls YouTube or calls the faker.
+"""
+
+from __future__ import annotations
+
+from typing import Any
+
+from .._runtime import CallResult, ConnectorConfigError, Mode, call
+from ..service import descriptor
+
+OPERATION = "playlist_item_insert"
+METHOD = "POST"
+PATH = "/youtube/v3/playlistItems"
+SIDE_EFFECTS = "unsafe-to-replay"
+
+
+def body(config: dict[str, Any]) -> dict[str, Any]:
+    """Build the JSON body for one call, failing loudly and specifically."""
+    if config.get("playlistId") is None or config.get("playlistId") == "":
+        raise ConnectorConfigError(
+            "playlist_item_insert: \"playlistId\" is required (Playlist ID)."
+        )
+
+    if config.get("videoId") is None or config.get("videoId") == "":
+        raise ConnectorConfigError(
+            "playlist_item_insert: \"videoId\" is required (Video ID)."
+        )
+
+    out: dict[str, Any] = {}
+    _value = config.get("playlistId")
+    if _value is None or _value == "":
+        raise ConnectorConfigError("playlist_item_insert: \"playlistId\" is required.")
+
+    out["snippet.playlistId"] = str(_value)
+    _value = config.get("videoId")
+    if _value is None or _value == "":
+        raise ConnectorConfigError("playlist_item_insert: \"videoId\" is required.")
+
+    out["snippet.resourceId.videoId"] = str(_value)
+
+    out["snippet.resourceId.kind"] = "youtube#video"
+    return _nest_fields(out)
+
+
+
+def query(config: dict[str, Any]) -> dict[str, Any]:
+    """The QUERY parameters, which are not the same as the body.
+
+    A POST can carry both. Sent in the body instead, a parameter like Sheets'
+    `valueInputOption` is IGNORED and the provider falls back to its own
+    default — so the request succeeds and quietly does the wrong thing.
+    """
+    out: dict[str, Any] = {}
+    out["part"] = "snippet"
+    return out
+
+def playlist_item_insert(
+    config: dict[str, Any],
+    *,
+    credentials: dict[str, str | None] | None = None,
+    mode: Mode = "auto",
+    connection_id: str | None = None,
+    attempts: int = 3,
+) -> CallResult:
+    """Add a video to a YouTube playlist."""
+    return call(
+        descriptor(),
+        operation=OPERATION,
+        method=METHOD,
+        path=PATH,
+        json_body=body(config),
+        config=config,
+        credentials=credentials,
+        mode=mode,
+        connection_id=connection_id,
+        attempts=attempts,
+    )
+
+
+
+def _nest_fields(flat: dict[str, Any]) -> dict[str, Any]:
+    """`{"properties.email": x}` -> `{"properties": {"email": x}}`.
+
+    A dotted `as` means NESTING, and only a JSON body can nest -- in a form body
+    that spelling already means a literal dotted key.
+    """
+    out: dict[str, Any] = {}
+
+    for path, value in flat.items():
+        parts = path.split(".")
+        node = out
+
+        for key in parts[:-1]:
+            found = node.get(key)
+            if not isinstance(found, dict):
+                found = {}
+                node[key] = found
+            node = found
+
+        node[parts[-1]] = value
+
+    # The ROOT is always an object -- a JSON body's top level is never a list
+    # -- so only its VALUES are converted. That also keeps the return type
+    # honest: `_listify` returns Any, and returning it directly is a
+    # no-any-return error under mypy --strict.
+    return {key: _listify(value) for key, value in out.items()}
+
+
+def _listify(node: Any) -> Any:
+    """A mapping whose keys are 0, 1, 2 ... is an ARRAY, not an object.
+
+    `dateRanges.0.startDate` has to become `[{...}]`. PHP produced the list by
+    accident -- its integer-keyed arrays serialise as JSON arrays -- while
+    TypeScript and Python produced `{"0": {...}}`, which the provider refuses
+    as the wrong type. The parity suite is what caught the disagreement, and
+    converting at the END keeps the walk above simple.
+    """
+    if not isinstance(node, dict):
+        return node
+
+    walked = {key: _listify(value) for key, value in node.items()}
+    wanted = [str(index) for index in range(len(walked))]
+
+    if walked and list(walked.keys()) == wanted:
+        return [walked[key] for key in wanted]
+
+    return walked
