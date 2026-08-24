@@ -40,9 +40,14 @@ final class PlaylistItemInsert
      * later as an "invalid request" from YouTube.
      *
      * @param array<string,mixed> $config
-     * @return array<string,scalar>
+     * An EMPTY body is `{}`, not `[]` — and PHP cannot tell those apart, because
+     * both are `array()` and `json_encode` picks the list. So an empty one is
+     * returned as an object. TypeScript and Python have no such ambiguity, which
+     * is why this is a difference only the byte-parity suite can see.
+     *
+     * @return array<string,mixed>|\stdClass
      */
-    public static function body(array $config): array
+    public static function body(array $config): array|\stdClass
     {
         if (($config['playlistId'] ?? null) === null || ($config['playlistId'] ?? null) === '') {
             throw new ConnectorConfigException('playlist_item_insert: "playlistId" is required (Playlist ID).');
@@ -62,7 +67,9 @@ final class PlaylistItemInsert
 
         $body['snippet.resourceId.kind'] = 'youtube#video';
 
-        return self::nestFields($body);
+        $body = self::nestFields($body);
+        $body = $body === [] ? new \stdClass() : $body;
+        return $body;
     }
 
     /**
@@ -73,14 +80,15 @@ final class PlaylistItemInsert
      * own default — so the request succeeds and does the wrong thing.
      *
      * @param array<string,mixed> $config
-     * @return array<string,scalar>
+     * @return array<string,mixed>|\stdClass
      */
-    public static function query(array $config): array
+    public static function query(array $config): array|\stdClass
     {
         $body = [];
 
         $body['part'] = 'snippet';
 
+        $body = $body === [] ? new \stdClass() : $body;
         return $body;
     }
 

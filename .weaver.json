@@ -32,7 +32,7 @@
     "packages/php/CHANGELOG.md": "7a08bc1dc2b6877256e76156d17a379bacfadc441bbe4e1b277bdc725b427d4d",
     "packages/php/LICENSE": "9c194b64f52c76e677eb84a3e30f369c82727ea58abe50670d5de3f9ccd23270",
     "packages/php/README.md": "f117953bfaf23ebf01d9d4ffb6039e62c53fcc53a82801b38dc4ce108cd7f94c",
-    "packages/php/src/Actions/PlaylistItemInsert.php": "31c27ad5271a7ece81d0b8cd062d6972482e8686e91ef715ad00a170f5bda4a4",
+    "packages/php/src/Actions/PlaylistItemInsert.php": "766f1faae874d750a40e0f7cd18440963786c9eded659337854dd1935e6e7f46",
     "packages/php/src/Youtube.php": "a8b2d4297fe4899860b2a047c4bc832fcfb430dc93c30f0c8090d4cb573afb76",
     "packages/php/src/YoutubeFaker.php": "fcc6182c103ab1d9234ee96cab7dabe2752b9b67726cf604f74c5100a7b5c709",
     "packages/php/tests/FakerTest.php": "a596d3f5a5762fbb028046854d0b6d3a5806cd916b8206bac4e3917b47eed37d",
