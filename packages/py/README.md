@@ -27,6 +27,55 @@ dependencies.
 subject to the kit's full approval bar, and one per provider is hundreds of
 dependencies nobody is tracking.
 
+## Setting it up
+
+Everything below is generated from `provider/manifest.json`, so it cannot disagree with what the packages do.
+
+### Credentials
+
+A YouTube connection holds 4 values.
+
+**Two kinds of value, and mixing them up matters.** A `provider` credential is ONE value for the whole installation — an OAuth app's client secret serves every connected account. An `account` credential is one per connected account. A host that stores the second where it stores the first lets one account's credentials reach another's.
+
+| Field | Scope | Secret | Where it comes from |
+|---|---|---|---|
+| **OAuth client ID** | per installation | not secret | From Google Cloud Console. One value for the whole installation. |
+| **OAuth client secret** | per installation | **secret** | The client secret for the same OAuth app. |
+| **Access token** | per connected account | **secret** | Per connected YouTube account; expires after one hour. |
+| **Refresh token** | per connected account | **secret** | Per connected YouTube account; the host uses it to refresh the access token. |
+
+### Authorising
+
+YouTube uses OAuth2 (authorization_code). The package DECLARES the exchange; the HOST performs it — a consent screen needs a browser, a redirect URI and somewhere to persist the result, and all three belong to the host.
+
+- **Authorize URL** — https://accounts.google.com/o/oauth2/v2/auth
+- **Token URL** — https://oauth2.googleapis.com/token
+- **Scopes** — `https://www.googleapis.com/auth/youtube.force-ssl`
+- **Access token lifetime** — 3600 seconds (1 hours). A host that never refreshes works all afternoon and is broken by morning.
+
+The refresh tokens do **not** rotate: the same one is reusable, so a refresh may safely be retried and may run concurrently. Stated rather than assumed, because the opposite — a provider that spends the token and revokes the grant on a replay — looks identical until it happens.
+
+### The estate
+
+**YouTube has no test estate, and somebody checked.** Everything this connector does is real. Use the faker to build against it.
+
+> YouTube has no sandbox. Every live-mode add changes a real playlist; use the faker during development and remove live test items afterward.
+
+## What it can do
+
+### Actions
+
+#### `playlist_item_insert` — YouTube playlist item
+
+Add a video to a YouTube playlist.
+
+`POST /youtube/v3/playlistItems` · **unsafe to replay** — a retried durable run does it TWICE
+
+| Input | Required | What it is |
+|---|---|---|
+| `playlistId` | yes | The YouTube id of the playlist to add the video to. |
+| `videoId` | yes | The YouTube id of the video to add. |
+
 ## Run it before you have credentials
 
 Every operation ships a **faker**, whether or not YouTube has a sandbox. Set a
