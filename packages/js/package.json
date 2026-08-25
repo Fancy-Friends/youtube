@@ -52,7 +52,7 @@
   },
   "peerDependencies": {
     "@particle-academy/fancy-flow": ">=0.47.1 <2.0",
-    "@particle-academy/youtube-ui": "0.2.0"
+    "@particle-academy/youtube-ui": ">=0.2.0 <0.3.0"
   },
   "peerDependenciesMeta": {
     "@particle-academy/fancy-flow": {

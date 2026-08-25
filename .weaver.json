@@ -19,7 +19,7 @@
     "packages/js/CHANGELOG.md": "8208568ff42c7e41c11f07c5237237bffcace9406da20308ac7569da8f7e0c0a",
     "packages/js/LICENSE": "9c194b64f52c76e677eb84a3e30f369c82727ea58abe50670d5de3f9ccd23270",
     "packages/js/README.md": "3a5b30e7298b5667a0cd348c9546cb26c3f5d289f919759b8b70da3c473cf777",
-    "packages/js/package.json": "14e9cb7da19f256d0a43582085ae69805d1f7e56ba63e1e6280258a24316274d",
+    "packages/js/package.json": "f14a57a5d8d4d37a054e3770cba31374d845bf38ecdb50d801bc2a02e6f571d3",
     "packages/js/src/actions/playlist-item-insert.ts": "6d0eb85af47ec307d1a1069adfe06524e53e032a6045bb861216849f293c156c",
     "packages/js/src/faker.ts": "213b3001ca56a91762e15a170f968910f603ebc6dc6fe4a72a72e1710f733c4b",
     "packages/js/src/flow.ts": "65b7348e49e064336a9562805f0cdd3f5a470f7c9f7438b672649b18a9d92f5b",
