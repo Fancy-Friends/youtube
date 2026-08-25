@@ -55,7 +55,7 @@
     "packages/ui/package.json": "f0f2bbc7c1b16a0a91da024437e7ed2d75cc77d52bc1d1e904e5743b270519ff",
     "packages/ui/src/index.ts": "c317852bfe3b9b62169d8b8a0ec6e3930326929aa102e259987a196654781826",
     "packages/ui/src/kinds/playlist-item-insert.ts": "4a6cc0e6e57e1df6245957cd470aa7aa57337e17c089352307eba9edc9ab6720",
-    "packages/ui/src/service.ts": "563aacb6dfbbc62c9b7eab745e08f73cee5ad8265e482cc2fd3da9afcf5d9d0d",
+    "packages/ui/src/service.ts": "ea4fff265936359f1f2fbc8e82be5f0e399246fc80955b33a35fbd737aa57a92",
     "packages/ui/tests/kinds.test.ts": "27dd74da3be17a4284e9d29cb973a562f427401942f6a22996056a7ac49834d8",
     "packages/ui/tsconfig.json": "2cdc4c3b504406aa9553ffad3d936061d66be410030ac3571f0fc81d737d6875",
     "packages/ui/tsup.config.ts": "4067a7f50c1fbbc3c25addab30d28ccada74cc2f80f1b23aecbdc85a3fa50bc0",
