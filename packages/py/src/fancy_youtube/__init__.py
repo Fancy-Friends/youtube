@@ -21,7 +21,7 @@ from .actions.playlist_item_insert import playlist_item_insert
 from .faker import respond
 from .service import BASE_URLS, CONNECTOR_API_VERSION, REQUIRES, SANDBOX, SERVICE, TITLE, descriptor
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 __all__ = [
     "BASE_URLS",
