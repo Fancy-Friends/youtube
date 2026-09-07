@@ -4,7 +4,8 @@
   "description": "YouTube for Node — the service descriptor, its faker, its webhook verification, and one function per operation. Plain HTTP on @particle-academy/fancy-connector-core; no vendor SDK.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fancy-Friends/youtube.git"
+    "url": "git+https://github.com/Fancy-Friends/youtube.git",
+    "directory": "packages/js"
   },
   "homepage": "https://github.com/Fancy-Friends/youtube#readme",
   "bugs": "https://github.com/Fancy-Friends/youtube/issues",
