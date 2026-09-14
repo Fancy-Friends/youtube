@@ -1,5 +1,7 @@
 # YouTube
 
+[![Fancified](art/fancified.svg)](https://particle.academy)
+
 YouTube for [fancy-flow][flow] — as **four imported, versioned packages**, one
 per runtime. Not vendored source: a copy cannot be upgraded, and third-party APIs
 change.
