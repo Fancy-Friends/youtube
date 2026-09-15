@@ -48,7 +48,7 @@ final class YoutubeFaker
     }
 
     /** @param array<string,mixed> $config */
-    private static function PlaylistItemInsert(array $config, mixed $fake): array
+    private static function PlaylistItemInsert(array $config, mixed $fake): array|\stdClass
     {
         return [
         'kind' => 'youtube#playlistItem',
