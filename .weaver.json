@@ -51,7 +51,7 @@
     "packages/py/src/fancy_youtube/_runtime.py": "3c50494246872800ef7ca56724e5fb866e3fc0ec0348fa2a79b2ff1444cf1ccc",
     "packages/py/src/fancy_youtube/actions/__init__.py": "a8f1ec0b096629e294d509f678a5f400c7b65c91d01e57cf5fd0c93a12046ce4",
     "packages/py/src/fancy_youtube/actions/playlist_item_insert.py": "139dc580927302055311ea076f76d87636032fbf3d702504247c6c88567d0c64",
-    "packages/py/src/fancy_youtube/faker.py": "a046936b0514b07bc6c596088efc8b3559c1495fdf8d10070d268742d3b631ca",
+    "packages/py/src/fancy_youtube/faker.py": "b8ae9ed5ab497dd6870e44b3b1bc9b736893c41c326433f2930855c80e4d466a",
     "packages/py/src/fancy_youtube/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "packages/py/src/fancy_youtube/service.py": "1abed8f6b6f32b5b82139606b259f4a3b95a913c1ff2f6ac06f0f7fe4ea26a62",
     "packages/py/tests/test_faker.py": "715a2d6d4aca59dbebc87060f90093f2a55ea34ee05c4c944855b644fa084e97",
