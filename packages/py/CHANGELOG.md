@@ -4,6 +4,27 @@ All notable changes to `@particle-academy/youtube-ui`,
 `@particle-academy/youtube-js`, `particle-academy/youtube-php` and
 `fancy-youtube`.
 
+## [0.3.0] — 2026-11-08
+
+### Added
+
+- **Laravel integration, in this package** (`src/Laravel/`), auto-discovered
+  through composer's `extra.laravel`. Laravel is SUGGESTED, never required:
+  outside a Laravel app none of it loads.
+  - a service provider that merges `config/youtube.php` under
+    `connectors.youtube` (credentials from the environment, or per call for a
+    multi-account app);
+  - the `Youtube` facade: `Youtube::call('<operation>', [...])` runs any action;
+  - `Youtube::fake()`, answered from the connector's faker, with
+    `assertSent` / `assertNotSent` / `assertNothingSent` / `assertSentCount`;
+  - its own Pest test of all of it against a booted Laravel app.
+
+### Changed
+
+- **Tests: Pest `^5`**, and `laravel/framework` `^13` as a DEV-ONLY test
+  dependency (the framework this package integrates with; nothing ships in
+  `require`).
+
 ## [0.2.4] — 2026-09-12
 
 ### Changed
