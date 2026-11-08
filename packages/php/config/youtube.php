@@ -20,12 +20,12 @@ return [
 
     'credentials' => [
         // OAuth client ID (one per installation).
-        'clientId' => env('YOUTUBE_CLIENTID'),
+        'clientId' => env('YOUTUBE_CLIENT_ID', env('YOUTUBE_CLIENTID')),
         // OAuth client secret (one per installation, secret).
-        'clientSecret' => env('YOUTUBE_CLIENTSECRET'),
+        'clientSecret' => env('YOUTUBE_CLIENT_SECRET', env('YOUTUBE_CLIENTSECRET')),
         // Access token (per connected account, secret).
-        'accessToken' => env('YOUTUBE_ACCESSTOKEN'),
+        'accessToken' => env('YOUTUBE_ACCESS_TOKEN', env('YOUTUBE_ACCESSTOKEN')),
         // Refresh token (per connected account, secret).
-        'refreshToken' => env('YOUTUBE_REFRESHTOKEN'),
+        'refreshToken' => env('YOUTUBE_REFRESH_TOKEN', env('YOUTUBE_REFRESHTOKEN')),
     ],
 ];

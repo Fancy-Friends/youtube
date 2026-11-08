@@ -4,6 +4,22 @@ All notable changes to `@particle-academy/youtube-ui`,
 `@particle-academy/youtube-js`, `particle-academy/youtube-php` and
 `fancy-youtube`.
 
+## [0.4.1] — 2026-11-08
+
+### Fixed
+
+- **The Laravel config's environment variable names now split camelCase**,
+  as documented. **Consumer action: none.** The old unsplit names are still
+  read as a fallback, so an app that set them keeps working; the new names
+  are preferred.
+
+  | Preferred | Still read |
+  |---|---|
+  | `YOUTUBE_CLIENT_ID` | `YOUTUBE_CLIENTID` |
+  | `YOUTUBE_CLIENT_SECRET` | `YOUTUBE_CLIENTSECRET` |
+  | `YOUTUBE_ACCESS_TOKEN` | `YOUTUBE_ACCESSTOKEN` |
+  | `YOUTUBE_REFRESH_TOKEN` | `YOUTUBE_REFRESHTOKEN` |
+
 ## [0.4.0] — 2026-11-08
 
 ### Added
