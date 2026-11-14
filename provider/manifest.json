@@ -39,6 +39,49 @@
   "sandboxNote": "YouTube has no sandbox. Every live-mode add changes a real playlist; use the faker during development and remove live test items afterward.",
   "baseUrls": { "live": "https://youtube.googleapis.com" },
   "encoding": "json",
+  "summary": "Add videos to YouTube playlists from a workflow or a Laravel app.",
+  "$setupComment": "Steps read from Google's docs on 2026-11-14 (each cites its page). Every Google connector shares one grant, so the first four steps are the same for all of them; do them once.",
+  "setup": [
+    {
+      "title": "Create (or reuse) the Google Cloud project for {{appName}}",
+      "detail": "Every Google connector shares ONE consent grant (oauth.grant \"google\"), so use one project and one OAuth client for all of them: one consent and one refresh token per person.",
+      "url": "https://developers.google.com/workspace/guides/create-project"
+    },
+    {
+      "title": "Enable the YouTube Data API v3",
+      "detail": "Console: APIs & Services, Library; open the YouTube Data API v3 and click Enable.",
+      "url": "https://developers.google.com/workspace/guides/enable-apis"
+    },
+    {
+      "title": "Configure the consent screen",
+      "detail": "Console: Google Auth platform, Branding (app name {{appName}}, support email, contact email), then Audience: Internal for people inside your Google Workspace organisation only, or External (while it is in testing, add each tester under Test users). Then Data Access, Add or Remove Scopes, and add `https://www.googleapis.com/auth/youtube.force-ssl` beside the scopes of any other Google connector you use. You cannot remove the consent screen once it is configured.",
+      "url": "https://developers.google.com/workspace/guides/configure-oauth-consent"
+    },
+    {
+      "title": "Create a Web application OAuth client",
+      "detail": "Console: Google Auth platform, Clients, Create Client; type Web application. Under Authorized redirect URIs click Add URI and paste {{oauthRedirectUrl}}, then Create. Copy the client ID and client secret when the client is created.",
+      "url": "https://developers.google.com/workspace/guides/create-credentials",
+      "copy": [
+        {
+          "label": "Authorized redirect URI",
+          "value": "{{oauthRedirectUrl}}"
+        }
+      ],
+      "fields": [
+        "clientId",
+        "clientSecret"
+      ]
+    },
+    {
+      "title": "Connect an account and check it works",
+      "detail": "Connect one Google account through {{appName}}'s OAuth flow, then run the check below.",
+      "url": "https://developers.google.com/youtube/v3/docs/playlistItems/insert",
+      "actor": "agent",
+      "prompt": "Using {{appName}}'s {{connector}} connection, add a video the person names to a playlist they own with playlist_item_insert, and report the returned item id. Tell them they can remove it.",
+      "done": "playlist_item_insert returns an id and the video appears in that playlist."
+    }
+  ],
+
   "credentialFields": [
     { "key": "clientId", "label": "OAuth client ID", "scope": "provider", "secret": false, "help": "From Google Cloud Console. One value for the whole installation." },
     { "key": "clientSecret", "label": "OAuth client secret", "scope": "provider", "secret": true, "help": "The client secret for the same OAuth app." },
